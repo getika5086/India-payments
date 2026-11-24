@@ -1,0 +1,15 @@
+rail,label
+upi,UPI
+imps,IMPS
+neft,NEFT
+rtgs,RTGS
+netc,FASTag (NETC)
+bbps,Bill payments (BBPS)
+nach_credit,"NACH credit (salaries, pensions, subsidies)"
+nach_debit,"NACH debit (EMIs, SIPs, auto-debits)"
+cts,Cheques (CTS)
+atm,ATM withdrawals (NFS)
+micro_atm,Micro-ATM cash (AePS)
+aeps,AePS payments
+credit_card,Credit cards (shops + online)
+debit_card,Debit cards (shops + online)
