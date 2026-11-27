@@ -1,5 +1,6 @@
 import type { Data } from "../data";
 import { dayNames, monthName, pct } from "../format";
+import Notice from "./Notice";
 
 type BarsProps = { values: (number | null)[]; labels: string[]; highlight?: (i: number) => boolean; height?: number; ariaLabel: string };
 
@@ -48,19 +49,33 @@ const WEEK_RAILS = ["upi", "atm", "netc", "debit_card", "neft", "cts"];
 const MONTH_RAILS = ["nach_credit", "nach_debit", "atm", "bbps", "upi", "credit_card"];
 const SEASON_RAILS = ["upi", "atm", "netc", "debit_card", "credit_card", "neft"];
 
+const avg = (xs: (number | null)[]) => {
+  const v = xs.filter((x): x is number => x !== null);
+  return v.length ? v.reduce((a, b) => a + b, 0) / v.length : 0;
+};
+const times = (p: number) => `${(1 + p / 100).toFixed(1).replace(/\.0$/, "")} times`;
+
 export default function Rhythms({ data, year }: { data: Data; year: number }) {
   const short = dayNames.map((d) => d.slice(0, 3));
   const dom = Array.from({ length: 31 }, (_, i) => String(i + 1));
   const months = Array.from({ length: 12 }, (_, i) => monthName(i + 1).slice(0, 1));
   const monthsLong = Array.from({ length: 12 }, (_, i) => monthName(i + 1, true));
+  const wk = (id: string) => data.rhythms[id].weekday_by_year[String(year)] ?? [];
+  const dm = (id: string) => data.rhythms[id].day_of_month;
+  const my = (id: string) => data.rhythms[id].month_of_year;
+  const early = (id: string) => avg(dm(id).slice(0, 10));
+  const late = (id: string) => avg(dm(id).slice(20, 31));
+  const emi = extreme(dm("nach_debit"), dom).hi;
+  const upiWk = wk("upi").filter((v): v is number => v !== null);
+  const upiSpread = upiWk.length ? Math.max(...upiWk.map(Math.abs)) : 0;
 
   return (
     <>
       <h3>The week</h3>
-      <p className="lede">How each day of the week compares with that week's average, in {year}. Phone payments barely notice the weekend; the banking system does.</p>
+      <p className="lede">How each day of the week compares with that week's average, in {year}.</p>
       <div className="multiples">
         {WEEK_RAILS.map((id) => {
-          const v = data.rhythms[id].weekday_by_year[String(year)] ?? [];
+          const v = wk(id);
           if (!v.length) return null;
           const { hi, lo } = extreme(v, dayNames);
           return (
@@ -71,27 +86,55 @@ export default function Rhythms({ data, year }: { data: Data; year: number }) {
           );
         })}
       </div>
+      <Notice>
+        <ul>
+          <li><strong>UPI doesn't know it's the weekend.</strong> No day is more than {pct(upiSpread).replace("+", "")} away from average. It's how India pays for tea, groceries and auto rides, and daily life doesn't take Sundays off.</li>
+          <li><strong>FASTag is busiest on Saturday and Sunday</strong> ({pct(wk("netc")[5])}, {pct(wk("netc")[6])}): weekend trips and visits to family.</li>
+          <li><strong>The banking system does take Sundays off.</strong> NEFT falls {pct(wk("neft")[6]).replace(/^[+−]/, "")} and cheques don't clear at all; offices and businesses are shut.</li>
+          <li><strong>Card payments jump on Monday</strong> (debit {pct(wk("debit_card")[0])}). Most likely the weekend's card payments are counted when they settle with banks on Monday, not when you tap.</li>
+        </ul>
+      </Notice>
 
       <h3>Salary week</h3>
-      <p className="lede">Each day of the month compared with a typical day, across all years. The first days of the month are when salaries land and EMIs, SIPs and bills go out.</p>
+      <p className="lede">Each day of the month compared with a typical day, across all years.</p>
+      <div className="summary">
+        <p>
+          <strong>India's month has two halves.</strong> In the first ten days money arrives and leaves fast: salaries and pensions land,
+          loan EMIs and SIPs are auto-debited, bills get paid and ATMs have their busiest days. By the last ten days, cash withdrawals,
+          bill payments and UPI all slow down as wallets thin out, until the next payday starts the cycle again.
+        </p>
+        <ul className="summary-stats">
+          <li><span>EMIs & SIPs</span><strong>{times(emi.v)}</strong><em>a typical day's volume on the {emi.l}th</em></li>
+          <li><span>ATM cash</span><strong>{pct(early("atm"))} / {pct(late("atm"))}</strong><em>first ten days / last ten days</em></li>
+          <li><span>Bills</span><strong>{pct(early("bbps"))} / {pct(late("bbps"))}</strong><em>first ten days / last ten days</em></li>
+          <li><span>UPI</span><strong>{pct(early("upi"))} / {pct(late("upi"))}</strong><em>first ten days / last ten days</em></li>
+        </ul>
+      </div>
       <div className="multiples">
         {MONTH_RAILS.map((id) => {
-          const v = data.rhythms[id].day_of_month;
+          const v = dm(id);
           const { hi } = extreme(v, dom);
           return (
             <figure key={id} className="panel">
               <figcaption><strong>{name(data, id)}</strong><span>Peaks on day {hi.l} ({pct(hi.v)})</span></figcaption>
-              <SmallBars values={v} labels={dom} highlight={(i) => i < 5} ariaLabel={`${name(data, id)} by day of month`} />
+              <SmallBars values={v} labels={dom} highlight={(i) => i < 10} ariaLabel={`${name(data, id)} by day of month`} />
             </figure>
           );
         })}
       </div>
+      <Notice>
+        <ul>
+          <li><strong>The 2nd, 3rd and 5th are India's due dates.</strong> Banks and fund houses cluster auto-debits on a handful of days just after salaries arrive, so EMI and SIP volumes multiply on those dates.</li>
+          <li><strong>Credit cards barely follow payday.</strong> They are used through the month and paid off once, so the line stays flat.</li>
+          <li>Salaries and benefits also spike mid-month and on the last day: government benefits and some employers pay on fixed dates other than the 1st.</li>
+        </ul>
+      </Notice>
 
       <h3>The seasons</h3>
-      <p className="lede">Each month compared with the twelve months around it, typical across all years. Festive October and November, the year-end rush in March, the summer road trip.</p>
+      <p className="lede">Each month compared with the twelve months around it, typical across all years.</p>
       <div className="multiples">
         {SEASON_RAILS.map((id) => {
-          const v = data.rhythms[id].month_of_year;
+          const v = my(id);
           const { hi, lo } = extreme(v, monthsLong);
           return (
             <figure key={id} className="panel">
@@ -101,6 +144,13 @@ export default function Rhythms({ data, year }: { data: Data; year: number }) {
           );
         })}
       </div>
+      <Notice>
+        <ul>
+          <li><strong>October is the festive month.</strong> ATM cash ({pct(my("atm")[9])}), debit cards ({pct(my("debit_card")[9])}) and credit cards ({pct(my("credit_card")[9])}) all peak: Navratri, Dussehra, the big online sales and, often, Diwali shopping.</li>
+          <li><strong>March is year-end.</strong> NEFT jumps {pct(my("neft")[2]).replace(/^[+−]/, "")} as businesses settle accounts before the financial year closes on 31 March.</li>
+          <li><strong>FASTag follows the travel calendar.</strong> High from February to June (weddings, pilgrimages, summer holidays), low through the monsoon from July to October.</li>
+        </ul>
+      </Notice>
     </>
   );
 }

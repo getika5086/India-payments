@@ -40,7 +40,6 @@ KEEP = [
     (r"Ganesh Chaturthi", "Ganesh Chaturthi", "C2", "festival"),
     (r"Dussehra \(Mahashtami\)", "Durga Ashtami", "C2", "festival"),
     (r"^Dussehra$", "Dussehra", "C2", "festival"),
-    (r"Naraka Chaturdashi", "Choti Diwali (Naraka Chaturdashi)", "C2", "festival"),
     (r"^Diwali", "Diwali", "C2", "festival"),
     (r"Govardhan Puja", "Govardhan Puja (day after Diwali)", "C2", "festival"),
     (r"Bhai Duj", "Bhai Dooj", "C2", "festival"),
@@ -164,6 +163,11 @@ def main():
         rows.append(dict(date=ds, event=label, chapter=ch, type=typ,
                          source="https://en.wikipedia.org/wiki/" + page.replace(" ", "_"),
                          confidence="confirmed" if ok else "to verify"))
+    # The day before Diwali (Lakshmi Puja), by definition
+    for d in [r["date"] for r in rows if r["event"] == "Diwali"]:
+        prev = (date.fromisoformat(d) - pd.Timedelta(days=1)).isoformat()
+        rows.append(dict(date=prev, event="Day before Diwali", chapter="C2", type="festival",
+                         source="calendar date (day before Diwali)", confidence="confirmed"))
     # New Year's Eve, by definition
     for y in YEARS:
         rows.append(dict(date=f"{y}-12-31", event="New Year's Eve", chapter="C2", type="festival",

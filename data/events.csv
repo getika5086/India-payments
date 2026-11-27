@@ -18,8 +18,8 @@ date,event,chapter,type,source,confidence
 2020-10-23,Durga Ashtami,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2020-10-25,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2020-11-10,IPL final,C3,sport,https://en.wikipedia.org/wiki/2020_Indian_Premier_League,confirmed
+2020-11-13,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2020-11-13,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,to verify
-2020-11-14,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2020-11-14,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2020-11-15,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2020-11-16,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -51,7 +51,7 @@ date,event,chapter,type,source,confidence
 2021-10-15,IPL final,C3,sport,https://en.wikipedia.org/wiki/2021_Indian_Premier_League,confirmed
 2021-10-24,"India v Pakistan, T20 World Cup",C3,sport,https://en.wikipedia.org/wiki/2021_ICC_Men's_T20_World_Cup,confirmed
 2021-11-02,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,confirmed
-2021-11-04,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2021-11-03,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2021-11-04,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2021-11-05,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2021-11-06,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -81,9 +81,9 @@ date,event,chapter,type,source,confidence
 2022-10-02,Gandhi Jayanti,C3,civic,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2022-10-03,Durga Ashtami,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2022-10-05,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2022-10-23,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2022-10-23,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,to verify
 2022-10-23,"India v Pakistan, T20 World Cup",C3,sport,https://en.wikipedia.org/wiki/2022_ICC_Men's_T20_World_Cup,confirmed
-2022-10-24,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2022-10-24,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2022-10-25,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2022-10-26,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -114,7 +114,7 @@ date,event,chapter,type,source,confidence
 2023-10-22,Durga Ashtami,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2023-10-24,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2023-11-10,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,to verify
-2023-11-12,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2023-11-11,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2023-11-12,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2023-11-13,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2023-11-14,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -156,7 +156,7 @@ date,event,chapter,type,source,confidence
 2024-10-11,Durga Ashtami,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2024-10-12,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2024-10-29,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,confirmed
-2024-10-31,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2024-10-30,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2024-10-31,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2024-11-02,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2024-11-03,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -188,7 +188,7 @@ date,event,chapter,type,source,confidence
 2025-10-02,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2025-10-02,Gandhi Jayanti,C3,civic,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2025-10-18,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,to verify
-2025-10-20,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2025-10-19,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2025-10-20,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2025-10-22,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2025-10-23,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
@@ -215,7 +215,7 @@ date,event,chapter,type,source,confidence
 2026-10-19,Durga Ashtami,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2026-10-20,Dussehra,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2026-11-06,Dhanteras,C2,festival,https://en.wikipedia.org/wiki/Dhanteras,confirmed
-2026-11-08,Choti Diwali (Naraka Chaturdashi),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
+2026-11-07,Day before Diwali,C2,festival,calendar date (day before Diwali),confirmed
 2026-11-08,Diwali,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2026-11-10,Govardhan Puja (day after Diwali),C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
 2026-11-11,Bhai Dooj,C2,festival,https://github.com/vacanza/holidays (India: central government holiday lists),confirmed
